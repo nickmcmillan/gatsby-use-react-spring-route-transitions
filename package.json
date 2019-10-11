@@ -1,19 +1,16 @@
 {
-  "name": "using-page-transitions",
-  "description": "Gatsby example site using page transitions",
+  "name": "gatsby-react-spring-route-transitions",
+  "description": "Gatsby example site using React Spring for route transitions",
   "version": "1.0.0",
-  "author": "Steven Surgnier <stevensurgnier@gmail.com>",
+  "author": "Nick McMillan <nick.a.mcmillan@gmail.com>",
   "dependencies": {
-    "@reach/router": "^1.2.1",
     "gatsby": "^2.0.0",
     "gatsby-plugin-layout": "^1.0.0",
     "gatsby-plugin-react-helmet": "^3.0.0",
-    "path-to-regexp": "^3.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
-    "react-spring": "^8.0.27",
-    "react-transition-group": "^2.4.0"
+    "react-spring": "^8.0.27"
   },
   "keywords": [
     "gatsby"
