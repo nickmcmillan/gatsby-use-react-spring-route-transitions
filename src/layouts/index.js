@@ -15,7 +15,7 @@ const Header = () => (
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 700,
+        maxWidth: 960,
         padding: `1.45rem 1.0875rem`,
       }}
     >
@@ -34,20 +34,21 @@ const Header = () => (
   </div>
 )
 
-
-function keyExists(key, arr) {
+// Check if an object already exists in an array
+// https://stackoverflow.com/a/22844694/2255980
+function keyExistsInArray(key, arr) {
   return arr.some(function (el) {
-    return el.key === key;
-  });
+    return el.key === key
+  })
 }
 
-// gatsby-plugin-layout does not give us any information about the previous route
-// so we need to store visited routes outside of TemplateWrapper (which Gatsby controls the rendering for)
-const visitedRoutes = []
+const TemplateWrapper = ({ location, children }) => {
 
-const TemplateWrapper = (outerProps) => {
+  // gatsby-plugin-layout does not give us any information about the previous route
+  // so we need to store visited routes in a ref so it persists
+  const visitedRoutes = useRef([])
 
-  const transitions = useTransition(outerProps.location, x => x.pathname, {
+  const transitions = useTransition(location, x => x.pathname, {
     from: { position: 'absolute', opacity: 0, transform: 'translate3d(100%,0,0)' },
     enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
     leave: { opacity: 0, transform: 'translate3d(-100%,0,0)' },
@@ -57,9 +58,9 @@ const TemplateWrapper = (outerProps) => {
 
   // don't push into the visitedRoutes array if its already been pushed,
   // else the array would grow on every single route change
-  const hasBeenPushed = keyExists(outerProps.children.key, visitedRoutes)
-  if (!hasBeenPushed) {
-    visitedRoutes.push(outerProps.children)
+  const exists = keyExistsInArray(children.key, visitedRoutes.current)
+  if (!exists) {
+    visitedRoutes.current.push(children)
   }
 
   return (
@@ -75,7 +76,7 @@ const TemplateWrapper = (outerProps) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 700,
+          maxWidth: 960,
           padding: `0px 1.0875rem 1.45rem`,
           paddingTop: 0,
         }}
@@ -87,18 +88,17 @@ const TemplateWrapper = (outerProps) => {
               key={key}
               style={props}
             >
-              {item.pathname === outerProps.children.key ? (
+              {item.pathname === children.key ? (
                 // entering view
-                outerProps.children
+                children
               ) : (
                 // exiting view
-                visitedRoutes.find(x => x.key === item.pathname)
+                visitedRoutes.current.find(x => x.key === key)
               )}
             </animated.div>
           )
         })}
 
-        {/* <Transition location={outerProps.location}>{outerProps.children}</Transition> */}
       </div>
     </div>
   )
