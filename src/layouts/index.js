@@ -49,8 +49,8 @@ const TemplateWrapper = ({ location, children }) => {
   const visitedRoutes = useRef([])
 
   const transitions = useTransition(location, x => x.pathname, {
-    from: { position: 'absolute', opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+    from: { position: 'absolute', opacity: 0.01, transform: 'translate3d(-20%,0,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
     leave: { opacity: 0, transform: 'translate3d(-100%,0,0)' },
     unique: true,
     reset: true,
@@ -82,13 +82,15 @@ const TemplateWrapper = ({ location, children }) => {
         }}
       >
         {transitions.map(({ item, props, key }) => {
+          console.log(item.pathname, children.key, key)
+          
 
           return (
             <animated.div
               key={key}
               style={props}
             >
-              {item.pathname === children.key ? (
+              {children.key === key ? (
                 // entering view
                 children
               ) : (
