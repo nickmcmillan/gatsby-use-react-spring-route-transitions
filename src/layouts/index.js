@@ -92,8 +92,9 @@ const TemplateWrapper = ({ location, children }) => {
                 // entering view
                 children
               ) : (
-                // exiting view, again, not sure if this is the best approach
-                visitedRoutes.current.find(x => x.key === key)
+                // again, not sure if this is the best approach
+                // exiting view. or just render children if its the initial render
+                visitedRoutes.current.find(x => x.key === key) || children
               )}
             </animated.div>
           )
