@@ -48,9 +48,9 @@ const TemplateWrapper = ({ location, children }) => {
   // so we need to store visited routes in a ref so it persists
   const visitedRoutes = useRef([])
 
-  const transitions = useTransition(location, x => x.pathname, {
-    from: { position: 'absolute', opacity: 0.01, transform: 'translate3d(-20%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
+  const transitions = useTransition(location, location.pathname, {
+    from: { position: 'absolute', opacity: 0.01, transform: 'translate3d(100%,0,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
     leave: { opacity: 0, transform: 'translate3d(-100%,0,0)' },
     unique: true,
     reset: true,
@@ -82,15 +82,13 @@ const TemplateWrapper = ({ location, children }) => {
         }}
       >
         {transitions.map(({ item, props, key }) => {
-          console.log(item.pathname, children.key, key)
-          
 
           return (
             <animated.div
               key={key}
               style={props}
             >
-              {children.key === key ? (
+              {item.pathname === children.key ? (
                 // entering view
                 children
               ) : (
