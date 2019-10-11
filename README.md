@@ -1,7 +1,10 @@
-# using-page-transitions
+# gatsby-react-spring-route-transitions
 
-Gatsby example site using page transitions.
+Gatsby example site using React Spring for route transitions.
 
-This example uses `react-transition-group` in conjunction with `gatsby-plugin-layout`. For more complex page transitions and no `gatsby-plugin-layout` dependency, you can make use of [`react-pose`](https://github.com/Popmotion/popmotion/tree/master/packages/react-pose).
+Not sure if this is the best approach, but it works well.
 
-[View the live demo](https://using-page-transitions.netlify.com/)
+Uses `shouldUpdateScroll` function in `gatsby-browser.js` to manage scroll position.
+
+
+[View the live demo](https://gatsby-react-spring-route-transitions.netlify.com/)
