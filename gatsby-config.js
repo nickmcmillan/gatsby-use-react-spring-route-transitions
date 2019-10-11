@@ -8,9 +8,6 @@ module.exports = {
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve(`./src/layouts/index.js`),
-        context: {
-          balls: 'balls'
-        }
       },
     },
   ],
